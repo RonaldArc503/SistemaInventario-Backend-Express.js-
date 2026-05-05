@@ -32,8 +32,8 @@
 const express = require('express');
 const router = express.Router();
 
-const usersController = require('../controllers/usersController');
-const { validateUser, runValidations } = require('../middlewares/validators');
+const usersController = require('../usuarios/usuario.controller');
+const { validateUser, runValidations } = require('../../middlewares/validators');
 
 // =================== RUTAS GET ===================
 
@@ -42,7 +42,7 @@ const { validateUser, runValidations } = require('../middlewares/validators');
 router.get('/', usersController.getAllUsers);
 
 // GET /users/:id
-// Obtiene un usuario por su ID
+// Obtiene un usuario por su ID`
 router.get('/:id', usersController.getUserById);
 
 // GET /users/email/:email

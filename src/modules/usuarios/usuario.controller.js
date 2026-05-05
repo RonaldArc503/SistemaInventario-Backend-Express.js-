@@ -29,7 +29,7 @@
  * SIN ESTO: No habría forma de conectar rutas con servicios
  */
 
-const usersService = require('../services/usersService');
+const usersService = require('../usuarios/usuario.service');
 
 /**
  * Obtiene TODOS los usuarios

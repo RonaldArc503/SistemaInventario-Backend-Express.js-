@@ -13,7 +13,7 @@
  * Ruta -> Controlador -> Servicio -> BD
  */
 
-const db = require('../utils/db');
+const db = require('../../utils/db');
 const bcrypt = require('bcryptjs');
 
 /**
