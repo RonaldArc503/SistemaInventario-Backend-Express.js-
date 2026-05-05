@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Usuario {
+  id               Int      @id @default(autoincrement())
+  nombre_usuario   String   @unique
+  contrasena_hash  String
+  nombre_completo  String
+  rol_id           Int
+  activo           Boolean  @default(true)
+  fecha_creacion   DateTime @default(now())
+  ultimo_acceso    DateTime?
+}
+
+model Producto {
+  id             Int      @id @default(autoincrement())
+  sku            String   @unique
+  nombre         String
+  descripcion    String?
+  precio_costo   Float
+  stock_actual   Int      @default(0)
+  activo         Boolean  @default(true)
+  fecha_creacion DateTime @default(now())
+}

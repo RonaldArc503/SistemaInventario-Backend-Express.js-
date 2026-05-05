@@ -7,6 +7,7 @@ app.use(express.json());
 
 // Rutas
 app.use('/api/usuarios', require('./src/modules/usuarios/usuario.routes'));
+app.use('/api/productos', require('./src/modules/productos/producto.routes'));
 
 // Middleware de errores (SIEMPRE al final)
 const errorHandler = require('./src/middlewares/errorHandler');
