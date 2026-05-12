@@ -41,10 +41,6 @@ const { validateUser, runValidations } = require('../../middlewares/validators')
 // Obtiene TODOS los usuarios
 router.get('/', usersController.getAllUsers);
 
-// GET /users/:id
-// Obtiene un usuario por su ID`
-router.get('/:id', usersController.getUserById);
-
 // GET /users/email/:email
 // Obtiene un usuario por su email
 router.get('/email/:email', usersController.getUserByEmail);
@@ -52,6 +48,10 @@ router.get('/email/:email', usersController.getUserByEmail);
 // GET /users/check/email?email=...
 // Verifica si un email ya existe en la BD (útil antes de registrar)
 router.get('/check/email', usersController.checkEmailExists);
+
+// GET /users/:id
+// Obtiene un usuario por su ID
+router.get('/:id', usersController.getUserById);
 
 // =================== RUTA POST ===================
 

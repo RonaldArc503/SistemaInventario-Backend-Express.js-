@@ -1,27 +1,27 @@
 const db = require('../../utils/db');
 
-const TIPO_PRODUCTO_COLUMNS = `
+const TIPO_PRECIO_COLUMNS = `
   id,
   nombre,
   descripcion,
   activo
 `;
 
-const getAllTiposProducto = async () => {
+const getAllTiposPrecio = async () => {
   const result = await db.query(
-    `SELECT ${TIPO_PRODUCTO_COLUMNS} FROM tipos_producto ORDER BY id DESC`
+    `SELECT ${TIPO_PRECIO_COLUMNS} FROM tipos_precio ORDER BY id DESC`
   );
   return result.rows;
 };
 
-const getTipoProductoById = async (id) => {
+const getTipoPrecioById = async (id) => {
   const result = await db.query(
-    `SELECT ${TIPO_PRODUCTO_COLUMNS} FROM tipos_producto WHERE id = $1`,
+    `SELECT ${TIPO_PRECIO_COLUMNS} FROM tipos_precio WHERE id = $1`,
     [id]
   );
 
   if (result.rows.length === 0) {
-    const error = new Error('Tipo de producto no encontrado');
+    const error = new Error('Tipo de precio no encontrado');
     error.status = 404;
     throw error;
   }
@@ -29,30 +29,30 @@ const getTipoProductoById = async (id) => {
   return result.rows[0];
 };
 
-const createTipoProducto = async (data = {}) => {
+const createTipoPrecio = async (data = {}) => {
   const result = await db.query(
-    `INSERT INTO tipos_producto (nombre, descripcion, activo)
+    `INSERT INTO tipos_precio (nombre, descripcion, activo)
      VALUES ($1, $2, $3)
-     RETURNING ${TIPO_PRODUCTO_COLUMNS}`,
+     RETURNING ${TIPO_PRECIO_COLUMNS}`,
     [data.nombre, data.descripcion ?? null, data.activo ?? true]
   );
 
   return result.rows[0];
 };
 
-const updateTipoProducto = async (id, data = {}) => {
+const updateTipoPrecio = async (id, data = {}) => {
   const result = await db.query(
-    `UPDATE tipos_producto
+    `UPDATE tipos_precio
      SET nombre = $1,
          descripcion = $2,
          activo = $3
      WHERE id = $4
-     RETURNING ${TIPO_PRODUCTO_COLUMNS}`,
+     RETURNING ${TIPO_PRECIO_COLUMNS}`,
     [data.nombre, data.descripcion ?? null, data.activo ?? true, id]
   );
 
   if (result.rows.length === 0) {
-    const error = new Error('Tipo de producto no encontrado');
+    const error = new Error('Tipo de precio no encontrado');
     error.status = 404;
     throw error;
   }
@@ -60,7 +60,7 @@ const updateTipoProducto = async (id, data = {}) => {
   return result.rows[0];
 };
 
-const partialUpdateTipoProducto = async (id, data = {}) => {
+const partialUpdateTipoPrecio = async (id, data = {}) => {
   const allowedFields = ['nombre', 'descripcion', 'activo'];
   const updates = {};
 
@@ -82,12 +82,12 @@ const partialUpdateTipoProducto = async (id, data = {}) => {
   const values = [...Object.values(updates), id];
 
   const result = await db.query(
-    `UPDATE tipos_producto SET ${setClause} WHERE id = $${values.length} RETURNING ${TIPO_PRODUCTO_COLUMNS}`,
+    `UPDATE tipos_precio SET ${setClause} WHERE id = $${values.length} RETURNING ${TIPO_PRECIO_COLUMNS}`,
     values
   );
 
   if (result.rows.length === 0) {
-    const error = new Error('Tipo de producto no encontrado');
+    const error = new Error('Tipo de precio no encontrado');
     error.status = 404;
     throw error;
   }
@@ -95,26 +95,26 @@ const partialUpdateTipoProducto = async (id, data = {}) => {
   return result.rows[0];
 };
 
-const deleteTipoProducto = async (id) => {
+const deleteTipoPrecio = async (id) => {
   const result = await db.query(
-    `UPDATE tipos_producto SET activo = false WHERE id = $1 RETURNING ${TIPO_PRODUCTO_COLUMNS}`,
+    `UPDATE tipos_precio SET activo = false WHERE id = $1 RETURNING ${TIPO_PRECIO_COLUMNS}`,
     [id]
   );
 
   if (result.rows.length === 0) {
-    const error = new Error('Tipo de producto no encontrado');
+    const error = new Error('Tipo de precio no encontrado');
     error.status = 404;
     throw error;
   }
 
-  return { message: 'Tipo de producto desactivado' };
+  return { message: 'Tipo de precio desactivado' };
 };
 
 module.exports = {
-  getAllTiposProducto,
-  getTipoProductoById,
-  createTipoProducto,
-  updateTipoProducto,
-  partialUpdateTipoProducto,
-  deleteTipoProducto
-};module.exports = {};
+  getAllTiposPrecio,
+  getTipoPrecioById,
+  createTipoPrecio,
+  updateTipoPrecio,
+  partialUpdateTipoPrecio,
+  deleteTipoPrecio
+};

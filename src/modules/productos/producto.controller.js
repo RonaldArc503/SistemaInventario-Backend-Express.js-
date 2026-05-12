@@ -27,8 +27,38 @@ const createProducto = async (req, res, next) => {
   }
 };
 
+const updateProducto = async (req, res, next) => {
+  try {
+    const data = await service.updateProducto(req.params.id, req.body);
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const partialUpdateProducto = async (req, res, next) => {
+  try {
+    const data = await service.partialUpdateProducto(req.params.id, req.body);
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteProducto = async (req, res, next) => {
+  try {
+    const data = await service.deleteProducto(req.params.id);
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllProductos,
   getProductoById,
-  createProducto
+  createProducto,
+  updateProducto,
+  partialUpdateProducto,
+  deleteProducto
 };
